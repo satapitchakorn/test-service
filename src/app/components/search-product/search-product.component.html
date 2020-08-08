@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-header">
+      <h1>Search Toy</h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-1">
+          Select Age:
+        </div>
+        <div class="col-sm-2">
+          <select name="age" [(ngModel)]="ageOption" class="form-control inputstl" style="width:200px;">
+            <option value="3-5">3-5</option>
+            <option value="over8">Over 8</option>
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <div class="col-sm-1">
+          Select Gender:
+        </div>
+        <div class="col-sm-2">
+          <select name="gender" [(ngModel)]="genderOption" class="form-control inputstl" style="width:200px;">
+            <option value="Neutral">Neutral</option>
+            <option value="Female">Female</option>
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <div class="col-sm-1">
+          <button style="margin-top:20px;" class="btn btn-primary" name="search"
+            (click)="searchProduct(ageOption, genderOption)"><i class="fa fa-search"> Search</i></button>
+        </div>
+      </div>
+  
+      <h2>{{ products.length }} toys found.</h2>
+      <div class="table-responsive tableFixHead" style="overflow-y:auto; height: 500px;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th style="text-align: end;">Price (USD)</th>
+              <th style="text-align: center;">Availability</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="products.length > 0">
+            <tr *ngFor="let product of products" [id]="product.id" (click)="onClickProduct(product,product.id)">
+              <td>{{ product.name }}</td>
+              <td style="text-align: end;">{{ product.price | number:'1.2-2'  }}</td>
+              <td style="text-align: center;"><a
+                  [ngStyle]="{'color': product.availability=='InStock'? 'green':'red'}">{{ product.availability=='InStock'?'In Stock':'Out of stock' }}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="products.length == 0" align="center">
+          <h3>ไม่มีข้อมูลสินค้า</h3>
+        </div>
+      </div>
+  
+    </div>
+  </div>

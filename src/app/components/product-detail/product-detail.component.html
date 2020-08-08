@@ -1,0 +1,74 @@
+<div class="card">
+    <div class="card-header" style="font-size: 30px;">
+      {{productDetail.name}}
+    </div>
+    <div class="card-body">
+      <div align="center" style="border: 50px; border-color: black;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg"
+          width="300em" height="300em" style="border: 1px solid #555;">
+      </div>
+      <br />
+      <div class="row" style="font-size: 1.25em;">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Brand: </strong>
+        </div>
+        <div class="col-sm-5" id="product_brand">
+          {{productDetail.brand}}
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Name: </strong>
+        </div>
+        <div class="col-sm-5" id="product_name">
+          {{productDetail.name}}
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Gender: </strong>
+        </div>
+        <div class="col-sm-5" id="gender">
+          {{productDetail.gender}}
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Age: </strong>
+        </div>
+        <div class="col-sm-5" id="age">
+          {{productDetail.age}}
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Price: </strong>
+        </div>
+        <div class="col-sm-5" id="product_price">
+          {{productDetail.price | number:'1.2-2'}}
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Quantity: </strong>
+        </div>
+        <div class="col-sm-5">
+          <select id="quantity" [(ngModel)]="productDetail.amount" [disabled]="productDetail.availability !=='InStock'">
+            <ng-container *ngFor=" let item of array(productDetail.quantity+1); let i=index;">
+              <option value={{i}}>{{i}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-1">
+          <strong>Available: </strong>
+        </div>
+        <div class="col-sm-5">
+          <a [ngStyle]="{'color': productDetail.availability=='InStock'? 'green':'red'}"
+            id="stock">{{ productDetail.availability=='InStock'?'Available':'Out of stock' }}</a>
+        </div>
+      </div>
+      <br />
+      <div align="center">
+        <button id="add_button" [disabled]="productDetail.availability !=='InStock'" (click)="onAddtoCart()"
+          class="btn btn-primary" style="size: 20px; margin-left: 20px;"><i class="fa fa-shopping-cart"> ADD TO
+            CART</i></button>
+      </div>
+    </div>
+  </div>
